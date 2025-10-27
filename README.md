@@ -106,3 +106,150 @@ Today felt productive! I got familiar with how Salesforce Trailhead works and ho
 Today’s module was really insightful! I learned how triggers automate business logic and how important it is to keep them efficient. Excited to move on to more complex Apex topics 💻⚡  
 
 ---
+
+### 📅 Day 4 - [20-10-2025]
+**Topic:**  
+*Apex Testing*
+
+**What I Did:**
+- Completed the Apex Testing module (earned 1,500 points).
+- Covered three major sections:
+  1. Get Started with Apex Unit Tests
+  2. Test Apex Triggers
+  3. Create Test Data for Apex Tests
+
+ ---
+
+ #### 🔹 Get Started with Apex Triggers
+**What I Learned:**
+- The Apex Testing Framework helps ensure that classes and triggers work correctly.
+- Apex unit tests:
+  - Validate functionality and prevent regression bugs.
+  - Are required for code deployment (at least 75% code coverage).
+  - Improve app quality and maintainability.
+- Learned test class and method syntax using @isTest.
+- Understood the importance of positive and negative test cases, boundary testing, and assertions (System.assertEquals).
+**Practiced Examples:**
+- Created a simple class TemperatureConverter that converts Fahrenheit to Celsius.
+- Wrote its test class TemperatureConverterTest with multiple test methods for different scenarios (freezing, boiling, warm, and negative temperatures).
+- Verified successful test runs and explored code coverage results in the Developer Console.
+- Simulated a failed test using incorrect expected values to understand test failures.
+**Key Takeaways:**
+- Write comprehensive tests — not just for coverage, but for quality validation.
+- Rerun tests after every code change to update coverage results.
+- Code coverage improves when all logic branches (e.g., if-else conditions) are tested.
+   
+---
+
+ #### 🔹 Test Apex Triggers
+ **What I Learned:**
+ - Before deploying a trigger, it must be tested using unit tests.
+ - Learned to create and test a trigger that prevents account deletion when related opportunities exist.
+**Example Practiced:**
+- Created the AccountDeletion Trigger:
+  
+```apex
+trigger AccountDeletion on Account (before delete) {
+for(Account a : [SELECT Id FROM Account WHERE Id IN (SELECT AccountId FROM Opportunity) AND Id IN :Trigger.old]) {
+Trigger.oldMap.get(a.Id).addError('Cannot delete account with related opportunities.');
+}
+}
+```
+
+- Tested it using TestAccountDeletion class that:
+  - Inserts a test account and related opportunity.
+  - Attempts to delete the account.
+  - Asserts that deletion fails with the correct error message.
+**Concepts Learned:**
+- Using Test.startTest() and Test.stopTest() to isolate test execution and governor limits.
+- Ensuring triggers handle single record, bulk, and negative cases.
+- Importance of testing both valid and invalid scenarios to ensure robust trigger logic.
+
+---
+
+#### 🔹 Create Test Data for Apex Tests
+**What I Learned:**
+- Instead of creating test data repeatedly, use a test utility class to generate reusable test data.
+- Test data is rolled back automatically after test execution, so the org remains clean.
+- Created a utility class TestDataFactory with a reusable method to create accounts and opportunities.
+**Practiced Example:**
+
+```apex
+  @isTest
+public class TestDataFactory {
+    public static List<Account> createAccountsWithOpps(Integer numAccts, Integer numOppsPerAcct) {
+        List<Account> accts = new List<Account>();
+        for(Integer i=0;i<numAccts;i++) {
+            accts.add(new Account(Name='TestAccount' + i));
+        }
+        insert accts;
+
+        List<Opportunity> opps = new List<Opportunity>();
+        for(Account acct : accts) {
+            for(Integer k=0;k<numOppsPerAcct;k++) {
+                opps.add(new Opportunity(
+                    Name=acct.Name + ' Opportunity ' + k,
+                    StageName='Prospecting',
+                    CloseDate=System.today().addMonths(1),
+                    AccountId=acct.Id
+                ));
+            }
+        }
+        insert opps;
+        return accts;
+    }
+}
+```
+
+**Updated Test Class Example:**
+- Used TestDataFactory.createAccountsWithOpps(1,1) to create test data efficiently.
+- Reduced repetitive setup code and made tests cleaner.
+
+---
+
+#### 💡 Key Takeaways:
+- Unit tests ensure code quality, maintainability, and safe deployments.
+- Always test for multiple input scenarios and logical branches.
+-  Use test data factories to simplify and standardize data creation.
+-  Remember to include Test.startTest() and Test.stopTest() for accurate test execution.
+
+---
+
+#### 🧩 Skills Gained:
+- Writing and executing Apex test classes and methods.
+- Achieving and analyzing code coverage
+- Testing Apex triggers for various data operations.
+- Building test utility classes for reusable test data.
+- Writing assertions for expected outcomes and validation.
+**Reflection:**
+Today’s module gave me a deep understanding of Apex Testing — one of the most crucial parts of Salesforce development. I learned not just to test for deployment but to build tests that ensure long-term reliability. Feeling much more confident about writing efficient, reusable, and scalable test methods for real-world scenarios! 🚀 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
