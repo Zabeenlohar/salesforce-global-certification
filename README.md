@@ -129,11 +129,13 @@ Today’s module was really insightful! I learned how triggers automate business
   - Improve app quality and maintainability.
 - Learned test class and method syntax using @isTest.
 - Understood the importance of positive and negative test cases, boundary testing, and assertions (System.assertEquals).
+
 **Practiced Examples:**
 - Created a simple class TemperatureConverter that converts Fahrenheit to Celsius.
 - Wrote its test class TemperatureConverterTest with multiple test methods for different scenarios (freezing, boiling, warm, and negative temperatures).
 - Verified successful test runs and explored code coverage results in the Developer Console.
 - Simulated a failed test using incorrect expected values to understand test failures.
+
 **Key Takeaways:**
 - Write comprehensive tests — not just for coverage, but for quality validation.
 - Rerun tests after every code change to update coverage results.
@@ -145,6 +147,7 @@ Today’s module was really insightful! I learned how triggers automate business
  **What I Learned:**
  - Before deploying a trigger, it must be tested using unit tests.
  - Learned to create and test a trigger that prevents account deletion when related opportunities exist.
+
 **Example Practiced:**
 - Created the AccountDeletion Trigger:
   
@@ -160,6 +163,7 @@ Trigger.oldMap.get(a.Id).addError('Cannot delete account with related opportunit
   - Inserts a test account and related opportunity.
   - Attempts to delete the account.
   - Asserts that deletion fails with the correct error message.
+
 **Concepts Learned:**
 - Using Test.startTest() and Test.stopTest() to isolate test execution and governor limits.
 - Ensuring triggers handle single record, bulk, and negative cases.
@@ -172,6 +176,7 @@ Trigger.oldMap.get(a.Id).addError('Cannot delete account with related opportunit
 - Instead of creating test data repeatedly, use a test utility class to generate reusable test data.
 - Test data is rolled back automatically after test execution, so the org remains clean.
 - Created a utility class TestDataFactory with a reusable method to create accounts and opportunities.
+
 **Practiced Example:**
 
 ```apex
@@ -221,6 +226,7 @@ public class TestDataFactory {
 - Testing Apex triggers for various data operations.
 - Building test utility classes for reusable test data.
 - Writing assertions for expected outcomes and validation.
+
 **Reflection:**
 Today’s module gave me a deep understanding of Apex Testing — one of the most crucial parts of Salesforce development. I learned not just to test for deployment but to build tests that ensure long-term reliability. Feeling much more confident about writing efficient, reusable, and scalable test methods for real-world scenarios! 🚀 
 
