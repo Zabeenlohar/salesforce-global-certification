@@ -1,6 +1,6 @@
 ## 📘 Daily Log
 
-### 📅 Day 1 - [Date]
+### 📅 Day 1 - [14-10-2025]
 **Topic:**  
 **Salesforce Platform Basics**
 
